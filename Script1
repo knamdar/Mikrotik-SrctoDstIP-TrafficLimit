@@ -1,0 +1,12 @@
+#by Khashayar Namdar knamdar@uwo.ca
+:global SIP 192.168.2.0/24
+:global DIP 8.8.8.8
+:global ManMark "from-$SIP-to-$DIP"
+/ip firewall filter remove [find comment=$ManMark] ;
+ip firewall mangle add\
+chain=forward\
+src-address=$SIP\
+dst-address=$DIP\
+action=mark-packet\
+new-packet-mark=$ManMark\
+passthrough=no
