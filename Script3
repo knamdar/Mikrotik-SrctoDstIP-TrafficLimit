@@ -1,0 +1,3 @@
+#by Khashayar Namdar knamdar@uwo.ca
+:global ManMark
+/ip firewall mangle remove [find new-packet-mark=$ManMark]
