@@ -1,0 +1,12 @@
+#by Khashayar Namdar knamdar@uwo.ca
+#Global Variables must be declared to be accessible
+:global ManMark 
+:global SIP
+:global DIP
+:global TrafLim 100
+:local a $TrafLim
+:local b [/ip firewall mangle get [find new-packet-mark=$ManMark] bytes] 
+if (a<b) do={\
+/ip firewall mangle remove [find new-packet-mark=$ManMark] 
+/ip firewall filter add chain=forward src-address=$SIP dst-address=$DIP action=drop comment=$ManMark
+}
